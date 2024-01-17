@@ -2,8 +2,9 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt 
 import seaborn as sns
-import pyomo.environ as pyo
 from itertools import combinations
+import pyomo.environ as pyo
+import periodictable
 
 class MiningVisualizer():
     def __init__(self, data, subset = ['X', 'Y', 'Z'], figsize = 8, fontsize = 15, s = 30, elev = 30, azim = -75, labelpad = 10, cmap = 'turbo', colorbar = True):
@@ -85,3 +86,29 @@ class MineralogicalConversion:
         mineral_df['[SUM]'] = mineral_df.sum(axis = 1).round(2)
         display(frx_df, mineral_df)
         return frx_df, mineral_df
+
+def mass_percentage_distribution(chemical_composition):
+    elements = {}
+    total_mass = 0
+    # Calculate the total mass and mass of each element
+    for element, quantity in chemical_composition.items():
+        element_obj = getattr(periodictable, element)
+        element_mass = element_obj.mass * quantity
+        elements[element] = element_mass
+        total_mass += element_mass
+    # Calculate the mass percentage distribution for each element
+    percentage_distribution = {element: (mass / total_mass) * 100 for element, mass in elements.items()}
+    return percentage_distribution
+
+def calculate_compositions(compositions):
+    data = {}
+    for composition_name, composition in compositions.items():
+        data[composition_name] = mass_percentage_distribution(composition)
+    df = pd.DataFrame(data).fillna(0).round(2).rename_axis('Elements')    
+    return df.sort_index()[sorted(data.keys())]
+
+def Fragmentate(df, compositions):
+    result_df = calculate_compositions(compositions)
+    for index, row in result_df.iterrows():
+        df[index] = (df[row.index] * row / 100).sum(axis = 1)
+    return df[sorted(df.columns)].drop(result_df, axis = 1)
