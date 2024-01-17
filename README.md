@@ -19,7 +19,7 @@ import demin as dm
 ```
 
 ## History
-Demin emerged from an idea during my internship in Data Science at the Department of Mining Engineering (DEMIN) at the Federal University of Minas Gerais (UFMG). As data science is still a resource little explored in the field, demin proposes to bring functions that are simple to understand and that can help with common tasks for geometallurgical data analysis. In this early stage of development, many functions are yet to be added and tested. Consequently, comprehensive documentation is not available until version 1.0.0. 
+Demin emerged from an idea during my internship in Data Science at the Department of Mining Engineering (DEMIN) at the Federal University of Minas Gerais (UFMG). As data science is still an underexplored resource in this field, Demin proposes to bring functions that are easy to understand and can assist in common tasks related to geometallurgical data analysis. In this early stage of development, many functions are yet to be added and tested. Consequently, comprehensive documentation will not be available until version 1.0.0. 
 
 ## About the Developer
 For feedback, questions, or collaboration, feel free to reach out:
