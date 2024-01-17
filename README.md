@@ -15,7 +15,7 @@ To ensure you have the latest version:
 ## How to import (Google Colaboratory):
 Once installed, importing Demin is straightforward. Use the following Python code in your Google Colaboratory notebook:
 ```
-import demin as pg
+import demin as dm
 ```
 
 ## History
